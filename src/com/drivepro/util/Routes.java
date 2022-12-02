@@ -1,0 +1,6 @@
+package com.drivepro.util;
+
+public enum Routes {
+    ADMIN,CASHIER,CUSTOMER,VEHICLE,EMPLOYEE,BOOKING,INCOME,RETURN,HOME,CHOME, RESERVED;
+
+}

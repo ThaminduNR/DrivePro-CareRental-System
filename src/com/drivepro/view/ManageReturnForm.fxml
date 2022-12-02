@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="798.0" prefWidth="1306.0" styleClass="dashboard-main-context" stylesheets="@../styles/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivepro.controller.ManageReturnFormController">
+   <children>
+      <Label layoutX="80.0" layoutY="14.0" text="All Returns">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="36.0" layoutY="98.0" prefHeight="649.0" prefWidth="303.0" style="-fx-background-color: #f5f6fa;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+         <children>
+            <JFXButton layoutX="84.0" layoutY="574.0" prefHeight="45.0" prefWidth="135.0" styleClass="add-btn" stylesheets="@../styles/MainStyle.css" text="ADD" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <Separator layoutX="54.0" layoutY="69.0" prefHeight="3.0" prefWidth="1235.0" />
+      <TextField layoutX="1063.0" layoutY="86.0" prefHeight="31.0" prefWidth="222.0" promptText="Search" styleClass="search-bar" stylesheets="@../styles/MainStyle.css" />
+      <FontAwesomeIconView fill="#dcdde1" glyphName="SEARCH" layoutX="1030.0" layoutY="109.0" size="25" />
+      <Label layoutX="740.0" layoutY="84.0" text="All Return Details">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="346.0" layoutY="105.0" prefHeight="695.0" prefWidth="963.0">
+         <children>
+            <TableView fx:id="tblReturn" layoutX="20.0" layoutY="40.0" prefHeight="635.0" prefWidth="931.0" style="-fx-background-color: #f5f6fa;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <columns>
+                  <TableColumn fx:id="colnumber" prefWidth="122.0" text="Vehicle No" />
+                  <TableColumn fx:id="colName" prefWidth="134.0" text="Vehicle Name" />
+                  <TableColumn fx:id="colsDate" prefWidth="138.0" text="Start Date" />
+                  <TableColumn fx:id="colEndDate" prefWidth="122.0" text="End Date" />
+                  <TableColumn fx:id="colDayCount" prefWidth="133.0" text="Day Count" />
+                  <TableColumn fx:id="colDacharge" prefWidth="147.0" text="Day Of Charge" />
+                  <TableColumn fx:id="colcustId" prefWidth="133.0" text="Customer ID" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

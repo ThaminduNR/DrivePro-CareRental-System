@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="798.0" prefWidth="1306.0" style="-fx-background-color: white;" styleClass="customer-context" stylesheets="@../styles/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivepro.controller.IncomeReportsFormController">
+   <children>
+      <Label layoutX="55.0" layoutY="14.0" text="Income Reports">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="36.0" layoutY="98.0" prefHeight="661.0" prefWidth="615.0" style="-fx-background-color: #f5f6fa;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+         <children>
+            <Label layoutX="39.0" layoutY="36.0" text="All Payment Details">
+               <font>
+                  <Font name="System Italic" size="30.0" />
+               </font></Label>
+            <JFXButton layoutX="88.0" layoutY="135.0" onAction="#getAllPaymentDetails" prefHeight="45.0" prefWidth="135.0" styleClass="add-btn" stylesheets="@../styles/MainStyle.css" text="GENERATE" textFill="WHITE" />
+            <JFXButton layoutX="81.0" layoutY="362.0" onAction="#getAllOrders" prefHeight="45.0" prefWidth="135.0" styleClass="update-btn" stylesheets="@../styles/MainStyle.css" text="CLEAR" textFill="WHITE" />
+            <Label layoutX="36.0" layoutY="271.0" text="All Order  Details">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Separator layoutX="36.0" layoutY="225.0" prefHeight="3.0" prefWidth="542.0" />
+         </children>
+      </AnchorPane>
+      <Separator layoutX="54.0" layoutY="69.0" prefHeight="3.0" prefWidth="1235.0" />
+      <LineChart layoutX="674.0" layoutY="96.0" prefHeight="400.0" prefWidth="615.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </children>
+</AnchorPane>

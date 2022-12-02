@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="798.0" prefWidth="1306.0" style="-fx-background-color: white;" styleClass="customer-context" stylesheets="@../styles/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.drivepro.controller.HomeFormController">
+   <children>
+      <AnchorPane fx:id="MainContext" prefHeight="798.0" prefWidth="1306.0" style="-fx-background-color: white;" styleClass="dashboard-main-context" stylesheets="@../styles/MainStyle.css">
+         <children>
+            <AnchorPane layoutX="54.0" layoutY="156.0" prefHeight="214.0" prefWidth="160.0" style="-fx-background-color: #738CF2;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label fx:id="lblCustomer" layoutX="13.0" layoutY="24.0" text="480" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="76.0" text="All Customers" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="258.0" layoutY="156.0" prefHeight="214.0" prefWidth="160.0" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label fx:id="lblVehicles" layoutX="13.0" layoutY="24.0" text="152">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="76.0" text="Total Vehicles" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="464.0" layoutY="156.0" prefHeight="214.0" prefWidth="160.0" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label fx:id="lblBook" layoutX="13.0" layoutY="24.0" text="15">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="76.0" text="All Booking" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="664.0" layoutY="156.0" prefHeight="214.0" prefWidth="160.0" style="-fx-background-color: #FD9898;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label fx:id="lblReturn" layoutX="13.0" layoutY="24.0" text="256" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="76.0" text="All returns" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="55.0" layoutY="8.0" text="Hello! Admin">
+               <font>
+                  <Font name="System Bold" size="44.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="68.0" text="Never put off till tommorow what can be done today!">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="869.0" layoutY="158.0" prefHeight="214.0" prefWidth="396.0" style="-fx-background-color: #353A55;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css" />
+            <FontAwesomeIconView fill="#eb003d" glyphName="LIST_UL" layoutX="1222.0" layoutY="80.0" size="35" />
+            <Label layoutX="59.0" layoutY="116.0" text="Weekly Special" textFill="#8e9497">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="869.0" layoutY="116.0" text="Automatically Assign" textFill="#8e9497">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="57.0" layoutY="433.0" prefHeight="89.0" prefWidth="403.0" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label fx:id="lblreserve" layoutX="13.0" layoutY="14.0" text="15">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="60.0" text="To Be Reserve Vehicle" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="57.0" layoutY="552.0" prefHeight="89.0" prefWidth="403.0" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label layoutX="13.0" layoutY="14.0" text="15">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="60.0" text="Available Vehicle" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="59.0" layoutY="671.0" prefHeight="89.0" prefWidth="403.0" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <Label layoutX="13.0" layoutY="14.0" text="15">
+                     <font>
+                        <Font name="System Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="13.0" layoutY="60.0" text="Available Vehicle" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="626.0" layoutY="427.0" prefHeight="354.0" prefWidth="636.0" style="-fx-background-color: #FBFBFB;" styleClass="square-pallet" stylesheets="@../styles/MainStyle.css">
+               <children>
+                  <ImageView fitHeight="319.0" fitWidth="608.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../accets/Cars.gif" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <TextField layoutX="904.0" layoutY="14.0" prefHeight="31.0" prefWidth="222.0" promptText="Search" styleClass="search-bar" stylesheets="@../styles/MainStyle.css" />
+            <FontAwesomeIconView fill="#dcdde1" glyphName="SEARCH" layoutX="871.0" layoutY="39.0" size="25" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,231 @@
+/*main Stage design*/
+
+.d-clos-btn{
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+
+
+}
+.d-clos-btn:hover{
+    -fx-background-radius: 100px;
+    -fx-border-radius: 100px;
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+.d-admin-login-btn{
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #EB003D;
+    -fx-text-fill: white;
+}
+.d-admin-login-btn:hover{
+    -fx-background-radius: 10px;
+    -fx-border-radius:10px;
+    -fx-background-color: white;
+    -fx-text-fill: #EB003D;
+
+}
+.d-cashier-login-btn{
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #EB003D;
+    -fx-text-fill: white;
+
+
+}
+.d-cashier-login-btn:hover{
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: white;
+    -fx-text-fill: #EB003D;
+
+}
+/*login page design*/
+
+.login-page-btn{
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-background-color:#EB003D;
+    -fx-text-fill: white;
+}
+.login-page{
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+
+}
+.login-page-btn:hover{
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: white;
+    -fx-border-color:  #353A57;
+    -fx-text-fill: #353A57;
+
+}
+
+.login-page-google-btn{
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: white;
+    -fx-border-color: black;
+}
+.login-page-layout{
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-background-color: white;
+}
+
+/*dashboard Design*/
+
+.dashboard-side-Panel{
+    -fx-background-color:#353A55;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+
+}
+
+.navbar-button{
+    -fx-background-color: #ecf0f1;
+}
+.dashboard-main-context{
+    -fx-background-color:white;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+}
+.dashboard-main{
+    -fx-background-color: #ecf0f1;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+}
+.square-one{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #ecf0f1;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.square-two{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color:#ecf0f1;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.square-pallet{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color:#ecf0f1;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.search-bar{
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-background-color: #dcdde1;
+
+}
+
+.dashboard-button{
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+.dashboard-button:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: black;
+}
+
+/*Customer Form design*/
+
+.add-btn{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #738CF2;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.add-btn:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color:white;
+    -fx-text-fill: black;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.update-btn{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #353A55;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+.update-btn:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+.delete-btn{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #FD9898;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+.delete-btn:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+.customer-context{
+    -fx-background-color:white;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+
+}
+
+/*---------------BookingForm-----------------*/
+
+.lbl-status{
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-background-color: #dfe6e9;
+
+}
+.txt-fields{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 13px;
+}
+
+.payment-btn{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #FD9898;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+
+.payment-btn:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: black;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+}
+.add-cart{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-background-color: #4C5068;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+
+.add-cart:hover{
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-text-fill: black;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 , 0.0 , 0.0 , 10.0);
+
+}
+
