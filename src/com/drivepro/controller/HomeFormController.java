@@ -14,7 +14,7 @@ public class HomeFormController {
     public Label lblVehicles;
     public Label lblBook;
     public Label lblReturn;
-    public Label lblreserve;
+    public Label lblReseve;
 
     public void initialize(){
         loadCountOfCustomers();
@@ -102,7 +102,7 @@ public class HomeFormController {
                 count = resultSet.getString(1);
             }
 
-            lblreserve.setText(count);
+            lblReseve.setText(count);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

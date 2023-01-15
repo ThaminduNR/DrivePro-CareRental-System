@@ -18,7 +18,7 @@ public class IncomeReportsFormController {
 
             JasperReport jr = JasperCompileManager.compileReport(jd);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
         } catch (JRException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
     }
@@ -32,7 +32,7 @@ public class IncomeReportsFormController {
 
             JasperReport jr = JasperCompileManager.compileReport(jd);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, DBConnection.getInstance().getConnection());
-            JasperViewer.viewReport(jp);
+            JasperViewer.viewReport(jp,false);
         } catch (JRException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

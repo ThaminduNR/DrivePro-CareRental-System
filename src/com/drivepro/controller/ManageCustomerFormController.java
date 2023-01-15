@@ -48,28 +48,10 @@ public class ManageCustomerFormController {
         setValueFactory();
         setTableData();
         AddListener();
-        /*setCustomerId();*/
         generateOrderId();
     }
 
-   /* private void setCustomerId() {
-        try{
-            String sql = "SELECT customerId FROM `customer` ORDER BY customerId DESC LIMIT 1"; // 10 not working... (UNSIGNED)
-            ResultSet set = CrudUtil.execute(sql);
-            *//*PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);*//*
-            if (set.next()){
-                String tempOrderId=set.getString(1);
-                String[] array = tempOrderId.split("-");//[D,3]
-                int tempNumber=Integer.parseInt(array[1]);
-                int finalizeOrderId=tempNumber+1;
-                txtcustId.setText("C-"+finalizeOrderId);
-            }else {
-                txtcustId.setText("C-1");
-            }
-        }catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
-    }*/
+
 
     private void generateOrderId() {
         try {
@@ -128,14 +110,12 @@ public class ManageCustomerFormController {
                 }
                 Navigation.navigatePane(Routes.CUSTOMER, customerContext);
 
-
-
             }else{
                 new Alert(Alert.AlertType.ERROR,"Wrong phone number!").show();
             }
-            }
+        }
 
-            }
+    }
 
 
 

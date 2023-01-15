@@ -26,7 +26,6 @@ public class Navigation {
 
     private static void setUI(String location) throws IOException {
         Stage stage = new Stage();
-       /* stage.initStyle(StageStyle.UNDECORATED);*/
         stage.setScene(new Scene(FXMLLoader.load(Navigation.class.getResource("../view/"+location))));
         stage.show();
         stage.centerOnScreen();
