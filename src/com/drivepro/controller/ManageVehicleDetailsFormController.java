@@ -1,8 +1,11 @@
 package com.drivepro.controller;
 
-import com.drivepro.model.VehicleDetailModel;
-import com.drivepro.to.VehicleDetails;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.VehicleDetailBO;
+import com.drivepro.bo.custom.impl.VehicleDetailBOImpl;
+import com.drivepro.dto.ReturnVehicleDTO;
+import com.drivepro.dto.VehicleDetailsDTO;
 import com.drivepro.util.Navigation;
 import com.drivepro.util.Routes;
 import com.drivepro.view.tm.VehicleDetailTM;
@@ -42,6 +45,8 @@ public class ManageVehicleDetailsFormController {
     public TableColumn colCustomerID;
     public AnchorPane vDetailContext;
 
+   private final VehicleDetailBO vehicleDetailBO = (VehicleDetailBO) BOFactory.getBoFactory().getBO(BOTypes.VEHICLEDETAIL);
+
     public void initialize(){
         setValueFactory();
         loadAllDataToTable();
@@ -59,9 +64,9 @@ public class ManageVehicleDetailsFormController {
         double daycharge = Double.parseDouble(txtDayOfCharge.getText());
         String custId = txtCustId.getText();
 
-        VehicleDetails details = new VehicleDetails(vnumber,vname,sdate,edate,daycount,daycharge,custId);
+        ReturnVehicleDTO returnVehicleDTO = new ReturnVehicleDTO(vnumber,vname,sdate,edate,daycount,daycharge,custId);
         try {
-            boolean b = VehicleDetailModel.sendDataReturnTable(details);
+            boolean b = vehicleDetailBO.addReservedCompleteVehicle(returnVehicleDTO);
             if (b){
                 System.out.println("return send");
             }
@@ -71,7 +76,7 @@ public class ManageVehicleDetailsFormController {
         //complete reserve
 
         try {
-            boolean deleted = VehicleDetailModel.reserveComplete(vnumber);
+            boolean deleted = vehicleDetailBO.deleteHandOverVehicle(vnumber);
             if (deleted){
                 new Alert(Alert.AlertType.INFORMATION,"Reserved Success").show();
                 changeVehicleState(vnumber);
@@ -83,25 +88,13 @@ public class ManageVehicleDetailsFormController {
         } catch (SQLException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-
-        //set values return tables
-        /*VehicleDetails details = new VehicleDetails(vnumber,vname,sdate,edate,daycount,daycharge,custId);
-        try {
-            boolean b = VehicleDetailModel.sendDataReturnTable(details);
-            if (b){
-                System.out.println("return send");
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-*/
     }
 
     private void loadAllDataToTable(){
         ObservableList<VehicleDetailTM> list = FXCollections.observableArrayList();
         try {
-            ArrayList<VehicleDetails> allToBeReservedVehicle = VehicleDetailModel.getAlltobeReseveVehicle();
-            for (VehicleDetails vehicle :allToBeReservedVehicle) {
+            ArrayList<VehicleDetailsDTO> allToBeReservedVehicle =vehicleDetailBO.getAllReservedVehicle();
+            for (VehicleDetailsDTO vehicle :allToBeReservedVehicle) {
                 VehicleDetailTM vTM = new VehicleDetailTM(vehicle.getVehicleNo(),vehicle.getVehicleName(),vehicle.getStartDate(),vehicle.getEndDate(),vehicle.getDayCount(),vehicle.getDayOfCharge(),vehicle.getCustId() );
                 list.add(vTM);
             }
@@ -152,9 +145,9 @@ public class ManageVehicleDetailsFormController {
     }
 
     public void changeVehicleState(String id) throws SQLException {
-        String sql="UPDATE vehicle SET  status = 'Available' WHERE vehicleNo = ?";
+
         try {
-            boolean isUpdate = CrudUtil.execute(sql, id);
+            boolean isUpdate = vehicleDetailBO.changeVehicleState(id);
             if (isUpdate){
                 System.out.println("Available Up date");
             }

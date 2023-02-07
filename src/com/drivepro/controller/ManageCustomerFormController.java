@@ -1,12 +1,13 @@
 package com.drivepro.controller;
 
-import com.drivepro.model.CustomerModel;
-import com.drivepro.to.Customer;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.CustomerBO;
+import com.drivepro.bo.custom.impl.CustomerBOImpl;
+import com.drivepro.dto.CustomerDTO;
 import com.drivepro.util.Navigation;
 import com.drivepro.util.Routes;
 import com.drivepro.util.Validator;
-import com.drivepro.view.tm.CartTM;
 import com.drivepro.view.tm.CustomerTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,12 +18,10 @@ import javafx.scene.layout.AnchorPane;
 
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class ManageCustomerFormController {
 
@@ -43,7 +42,10 @@ public class ManageCustomerFormController {
     public TableColumn colDob;
     public AnchorPane customerContext;
 
-    public void initialize(){
+     CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOTypes.CUSTOMER);
+
+
+    public void initialize() {
 
         setValueFactory();
         setTableData();
@@ -52,19 +54,17 @@ public class ManageCustomerFormController {
     }
 
 
-
     private void generateOrderId() {
         try {
-            String lastOrderId= CustomerModel.getLastOrderId();
-            if (lastOrderId != null ){
-                lastOrderId=lastOrderId.split("[A-Z]")[1];
+            String lastOrderId = customerBO.getLastOrderId();
+            if (lastOrderId != null) {
+                lastOrderId = lastOrderId.split("[A-Z]")[1];
                 System.out.println(lastOrderId);
-                lastOrderId=String.format("C%03d",(Integer.parseInt(lastOrderId)+1));
+                lastOrderId = String.format("C%03d", (Integer.parseInt(lastOrderId) + 1));
                 txtcustId.setText(lastOrderId);
-            }else {
+            } else {
                 txtcustId.setText("C001");
             }
-
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -73,30 +73,27 @@ public class ManageCustomerFormController {
 
     }
 
-
     public void addCustomerOnAction(ActionEvent actionEvent) throws IOException {
 
         String id = txtcustId.getText();
-        String  name = txtcustName.getText();
+        String name = txtcustName.getText();
         String address = txtAddress.getText();
         String contact = txtContact.getText();
-        String  age=txtAge.getText();
+        String age = txtAge.getText();
         String dob = txtDob.getText();
 
 
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")) {
 
-        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")){
+            new Alert(Alert.AlertType.ERROR, "Empty TextField Please fill the blanks").show();
 
-            new Alert(Alert.AlertType.ERROR,"Empty TextField Please fill the blanks").show();
-
-        }else{
-            if (Validator.isPhoneNumberMatch(txtContact.getText())){
+        } else {
+            if (Validator.isPhoneNumberMatch(txtContact.getText())) {
                 int agenew = Integer.parseInt(txtAge.getText());
                 try {
-                    Customer customer = new Customer(id, name, address, contact, agenew, dob);
-                    boolean isAdded = false;
 
-                    isAdded = CustomerModel.addCustomer(customer);
+                    CustomerDTO customerDTO = new CustomerDTO(id, name, address, contact, agenew, dob);
+                    boolean isAdded = customerBO.addCustomer(customerDTO);
 
                     if (isAdded) {
                         new Alert(Alert.AlertType.INFORMATION, "Added Success").show();
@@ -110,48 +107,46 @@ public class ManageCustomerFormController {
                 }
                 Navigation.navigatePane(Routes.CUSTOMER, customerContext);
 
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Wrong phone number!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Wrong phone number!").show();
             }
         }
 
     }
 
-
-
-
     public void updateCustomerOnAction(ActionEvent actionEvent) throws IOException {
         String id = txtcustId.getText();
-        String  name = txtcustName.getText();
+        String name = txtcustName.getText();
         String address = txtAddress.getText();
         String contact = txtContact.getText();
         String age = txtAge.getText();
         String dob = txtDob.getText();
 
-        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")){
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")) {
 
-            new Alert(Alert.AlertType.ERROR,"Empty TextField Please fill the blanks").show();
+            new Alert(Alert.AlertType.ERROR, "Empty TextField Please fill the blanks").show();
 
-        }else{
+        } else {
 
             try {
                 int agenew = Integer.parseInt(txtAge.getText());
 
-                Customer customer = new Customer(id,name,address,contact,agenew,dob);
+
+                CustomerDTO customerDTO = new CustomerDTO(id, name, address, contact, agenew, dob);
                 boolean isUpdate = false;
 
-                isUpdate = CustomerModel.updateCustomer(customer);
-                if (isUpdate){
-                    new Alert(Alert.AlertType.INFORMATION,"Update Success").show();
+                isUpdate = customerBO.updateCustomer(customerDTO);
+                if (isUpdate) {
+                    new Alert(Alert.AlertType.INFORMATION, "Update Success").show();
                     clearText();
                     setTableData();
-                }else {
-                    new Alert(Alert.AlertType.INFORMATION,"Update Failed").show();
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Update Failed").show();
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            Navigation.navigatePane(Routes.CUSTOMER,customerContext);
+            Navigation.navigatePane(Routes.CUSTOMER, customerContext);
 
         }
 
@@ -159,47 +154,47 @@ public class ManageCustomerFormController {
 
     public void deleteCustomerOnAction(ActionEvent actionEvent) throws IOException {
         String id = txtcustId.getText();
-        String  name = txtcustName.getText();
+        String name = txtcustName.getText();
         String address = txtAddress.getText();
         String contact = txtContact.getText();
         String age = txtAge.getText();
         String dob = txtDob.getText();
 
-        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")){
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") || age.equalsIgnoreCase("") || dob.equalsIgnoreCase("")) {
 
-            new Alert(Alert.AlertType.ERROR,"Empty TextField Please fill the blanks").show();
+            new Alert(Alert.AlertType.ERROR, "Empty TextField Please fill the blanks").show();
 
-        }else {
+        } else {
             try {
-                boolean deleted = CustomerModel.deleteCustomer(id);
-                if (deleted){
-                    new Alert(Alert.AlertType.INFORMATION,"Delete Success").show();
+                boolean deleted = customerBO.deleteCustomer(id);
+                if (deleted) {
+                    new Alert(Alert.AlertType.INFORMATION, "Delete Success").show();
                     clearText();
                     setTableData();
-                }else {
-                    new Alert(Alert.AlertType.INFORMATION,"Delete failed").show();
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Delete failed").show();
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            Navigation.navigatePane(Routes.CUSTOMER,customerContext);
+            Navigation.navigatePane(Routes.CUSTOMER, customerContext);
         }
     }
 
-    public  void setValueFactory(){
-        colId.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("customerId"));
-        colName.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("name"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("address"));
-        colContact.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("contact"));
-        colAge.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("age"));
-        colDob.setCellValueFactory(new PropertyValueFactory<CustomerTM,String>("dob"));
+    public void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("customerId"));
+        colName.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("contact"));
+        colAge.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("age"));
+        colDob.setCellValueFactory(new PropertyValueFactory<CustomerTM, String>("dob"));
     }
 
     public void setTableData() {
         ObservableList<CustomerTM> cust = FXCollections.observableArrayList();
         try {
-            ArrayList<Customer> allCustomer = CustomerModel.getAllCustomer();
-            for (Customer c :allCustomer) {
+            ArrayList<CustomerDTO> allCustomer = customerBO.getAllCustomer();
+            for (CustomerDTO c : allCustomer) {
                 CustomerTM customerTM = new CustomerTM(c.getCustomerId(), c.getName(), c.getAddress(), c.getContact(), c.getAge(), c.getDob());
                 cust.add(customerTM);
 
@@ -212,9 +207,9 @@ public class ManageCustomerFormController {
 
     }
 
-    public void AddListener(){
+    public void AddListener() {
         customerTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue!=null) {
+            if (newValue != null) {
                 setDataToTextField(newValue);
             }
         });
@@ -229,7 +224,7 @@ public class ManageCustomerFormController {
         txtDob.setText(c.getDob());
     }
 
-    public void clearText(){
+    public void clearText() {
         txtcustId.clear();
         txtcustName.clear();
         txtAddress.clear();
@@ -245,7 +240,7 @@ public class ManageCustomerFormController {
         txtAge.setText(String.valueOf(i));
     }
 
-    public static int calculateAge(LocalDate dob)   {
+    public static int calculateAge(LocalDate dob) {
         LocalDate curDate = LocalDate.now();
         if ((dob != null) && (curDate != null)) {
             return Period.between(dob, curDate).getYears();

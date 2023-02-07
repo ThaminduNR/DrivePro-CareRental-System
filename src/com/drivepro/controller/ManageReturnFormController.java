@@ -1,13 +1,17 @@
 package com.drivepro.controller;
 
-import com.drivepro.model.ReturnVehicleModel;
-import com.drivepro.to.ReturnVehicle;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.ReturnVehicleBO;
+import com.drivepro.bo.custom.impl.ReturnVehicleBOImpl;
+import com.drivepro.dto.ReturnVehicleDTO;
 import com.drivepro.view.tm.ReturnVehicleTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,18 +27,19 @@ public class ManageReturnFormController {
     public TableColumn<ReturnVehicleTM, String> colDacharge;
     public TableColumn<ReturnVehicleTM, String> colcustId;
 
+    private final ReturnVehicleBO returnVehicleBO = (ReturnVehicleBO) BOFactory.getBoFactory().getBO(BOTypes.RETURNVEHICLE);
 
-    public void initialize(){
+    public void initialize() {
         setValueFactory();
         loadreturnData();
     }
 
-    public void loadreturnData(){
+    public void loadreturnData() {
         ObservableList<ReturnVehicleTM> list = FXCollections.observableArrayList();
         try {
-            ArrayList<ReturnVehicle> returnDetailList = ReturnVehicleModel.loadDataReturnTable();
-            for (ReturnVehicle r :returnDetailList) {
-                ReturnVehicleTM rtm = new ReturnVehicleTM(r.getVehicleNo(),r.getVehicleName(),r.getStartDate(),r.getEndDate(),r.getDayCount(),r.getDayOfCharge(),r.getCustId() );
+            ArrayList<ReturnVehicleDTO> returnDetailList = returnVehicleBO.getAllReturns();
+            for (ReturnVehicleDTO r : returnDetailList) {
+                ReturnVehicleTM rtm = new ReturnVehicleTM(r.getVehicleNo(), r.getVehicleName(), r.getStartDate(), r.getEndDate(), r.getDayCount(), r.getDayOfCharge(), r.getCustId());
                 list.add(rtm);
             }
             tblReturn.setItems(list);
@@ -44,13 +49,13 @@ public class ManageReturnFormController {
         }
     }
 
-    private  void setValueFactory(){
-        colnumber.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("vehicleNo"));
-        colName.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("vehicleName"));
-        colsDate.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("startDate"));
-        colEndDate.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("endDate"));
-        colDayCount.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("dayCount"));
-        colDacharge.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("dayOfCharge"));
-        colcustId.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM,String>("CustId"));
+    private void setValueFactory() {
+        colnumber.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("vehicleNo"));
+        colName.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("vehicleName"));
+        colsDate.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("startDate"));
+        colEndDate.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("endDate"));
+        colDayCount.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("dayCount"));
+        colDacharge.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("dayOfCharge"));
+        colcustId.setCellValueFactory(new PropertyValueFactory<ReturnVehicleTM, String>("CustId"));
     }
 }

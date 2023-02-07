@@ -1,7 +1,7 @@
 package com.drivepro.model;
 
-import com.drivepro.to.VehicleDetails;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.VehicleDetails;
+import com.drivepro.dao.CrudUtil;
 
 
 import java.sql.ResultSet;
@@ -53,17 +53,4 @@ public class VehicleDetailModel {
     }
 
 
-    public static boolean sendDataReturnTable(VehicleDetails details) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO returnVehicle VALUES(?,?,?,?,?,?,?)";
-        return CrudUtil.execute(sql,
-
-                details.getVehicleNo(),
-                details.getVehicleName(),
-                details.getStartDate(),
-                details.getEndDate(),
-                details.getDayCount(),
-                details.getDayOfCharge(),
-                details.getCustId()
-                );
-    }
 }

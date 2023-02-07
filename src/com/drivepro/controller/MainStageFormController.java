@@ -27,7 +27,7 @@ public class MainStageFormController {
 
 
     public void initialize() {
-        Media media = new Media("file:///C:/Users/thami/OneDrive/Desktop/Tupi/MainVideo.mp4");
+        Media media = new Media("file:///C:/Users/thami/OneDrive/Desktop/Tupi/video.mp4");
         MediaPlayer player = new MediaPlayer(media);
         mediaview.setMediaPlayer(player);
         player.setVolume(0);

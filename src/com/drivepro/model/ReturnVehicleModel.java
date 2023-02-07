@@ -1,13 +1,29 @@
 package com.drivepro.model;
 
-import com.drivepro.to.ReturnVehicle;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.ReturnVehicle;
+import com.drivepro.dao.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ReturnVehicleModel {
+
+    public static boolean sendDataReturnTable(ReturnVehicle details) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO returnVehicle VALUES(?,?,?,?,?,?,?)";
+        return CrudUtil.execute(sql,
+
+                details.getVehicleNo(),
+                details.getVehicleName(),
+                details.getStartDate(),
+                details.getEndDate(),
+                details.getDayCount(),
+                details.getDayOfCharge(),
+                details.getCustId()
+        );
+    }
+
+
     public static ArrayList<ReturnVehicle> loadDataReturnTable() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM returnVehicle";
         ArrayList<ReturnVehicle> returnList = new ArrayList<>();

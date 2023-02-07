@@ -1,8 +1,8 @@
 package com.drivepro.model;
 
 import com.drivepro.db.DBConnection;
-import com.drivepro.to.Customer;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.Customer;
+import com.drivepro.dao.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

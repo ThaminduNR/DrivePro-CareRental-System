@@ -1,8 +1,7 @@
 package com.drivepro.model;
 
-import com.drivepro.to.Cashier;
-import com.drivepro.to.Customer;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.Cashier;
+import com.drivepro.dao.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

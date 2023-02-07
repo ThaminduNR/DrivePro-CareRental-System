@@ -1,7 +1,7 @@
 package com.drivepro.model;
 
-import com.drivepro.to.Vehicle;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.Vehicle;
+import com.drivepro.dao.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

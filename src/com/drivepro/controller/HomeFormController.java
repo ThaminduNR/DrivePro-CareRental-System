@@ -1,11 +1,12 @@
 package com.drivepro.controller;
 
-import com.drivepro.db.DBConnection;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.HomeBO;
+import com.drivepro.bo.custom.impl.HomeBOImpl;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HomeFormController {
@@ -16,6 +17,10 @@ public class HomeFormController {
     public Label lblReturn;
     public Label lblReseve;
 
+
+
+     HomeBO homeBO = (HomeBO) BOFactory.getBoFactory().getBO(BOTypes.HOME);
+
     public void initialize(){
         loadCountOfCustomers();
         loadCountOfVehicle();
@@ -23,85 +28,49 @@ public class HomeFormController {
         loadCountOfReturn();
         loadCountOfReserveVehicle();
     }
+
     private void loadCountOfCustomers() {
-        String count = "";
         try {
-            String sql = "SELECT COUNT(customerId) FROM customer";
-            PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                count = resultSet.getString(1);
-            }
-
+            String count = homeBO.loadCountOfCustomers();
             lblCustomer.setText(count);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private void loadCountOfVehicle() {
-        String count = "";
         try {
-            String sql = "SELECT COUNT(vehicleNo) FROM vehicle";
-            PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                count = resultSet.getString(1);
-            }
-
+            String count = homeBO.loadCountOfVehicle();
             lblVehicles.setText(count);
-
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private void loadCountOfBooking() {
-        String count = "";
         try {
-            String sql = "SELECT COUNT(bookingId) FROM booking";
-            PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                count = resultSet.getString(1);
-            }
-
+            String count = homeBO.loadCountOfBooking();
             lblBook.setText(count);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private void loadCountOfReturn() {
-        String count = "";
         try {
-            String sql = "SELECT COUNT(vehicleNo) FROM returnvehicle";
-            PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                count = resultSet.getString(1);
-            }
-
+            String count = homeBO.loadCountOfReturn();
             lblReturn.setText(count);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private void loadCountOfReserveVehicle() {
-        String count = "";
         try {
-            String sql = "SELECT COUNT(vehicleNo) FROM vehicleDetail";
-            PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                count = resultSet.getString(1);
-            }
-
+            String count = homeBO.loadCountOfReserveVehicle();
             lblReseve.setText(count);
 
         } catch (SQLException | ClassNotFoundException e) {

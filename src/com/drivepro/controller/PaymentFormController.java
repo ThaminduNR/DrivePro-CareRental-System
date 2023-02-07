@@ -1,8 +1,10 @@
 package com.drivepro.controller;
 
-import com.drivepro.model.PaymentModel;
-import com.drivepro.to.Payment;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.PaymentBO;
+import com.drivepro.bo.custom.impl.PaymentBOImpl;
+import com.drivepro.dto.PaymentDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,8 @@ public class PaymentFormController {
     public ComboBox<String> cmbmethod;
     public TextField txtVnumber;
 
+    private final PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBO(BOTypes.PAYMENT);
+
     public void initialize(){
         ObservableList<String> obList = FXCollections.observableArrayList("Cash","Card","Cheque");
         cmbmethod.setItems(obList);
@@ -34,9 +38,7 @@ public class PaymentFormController {
 
     private void setPaymentId() {
         try{
-            String sql = "SELECT paymentId FROM `payment` ORDER BY paymentId DESC LIMIT 1"; // 10 not working... (UNSIGNED)
-            ResultSet set = CrudUtil.execute(sql);
-            /*PreparedStatement statement = DBConnection.getInstance().getConnection().prepareStatement(sql);*/
+            ResultSet set = paymentBO.generatePaymentId();
             if (set.next()){
                 String tempOrderId=set.getString(1);
                 String[] array = tempOrderId.split("-");//[D,3]
@@ -66,9 +68,9 @@ public class PaymentFormController {
 
         }else {
             double totalPay = Double.parseDouble(tottalPayment.getText());
-            Payment payment = new Payment(paymentId,custId,paydate,payTime,vehicleNo,totalPay,method);
+            PaymentDTO paymentDTO = new PaymentDTO(paymentId,custId,paydate,payTime,vehicleNo,totalPay,method);
             try {
-                boolean isAdded = PaymentModel.sendDataPaymentTable(payment);
+                boolean isAdded = paymentBO.addPayments(paymentDTO);
                 if (isAdded){
                     new Alert(Alert.AlertType.CONFIRMATION,"Payment Successful").show();
                     cancelOnAction(actionEvent);

@@ -1,21 +1,15 @@
 package com.drivepro.controller;
 
-import com.drivepro.util.CrudUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-
-import javax.swing.*;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 public class AdminLoginFormController {
     public AnchorPane adminLoginpane;
@@ -54,7 +48,7 @@ public class AdminLoginFormController {
             err.printStackTrace();
         }*/
 
-        if (user.equals("admin") && pws.equals("admin")){
+        if (user.equals("") && pws.equals("")){
 
             Stage stage = (Stage) adminLoginpane.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/MainDashboard.fxml"))));

@@ -1,7 +1,7 @@
 package com.drivepro.model;
 
-import com.drivepro.to.Payment;
-import com.drivepro.util.CrudUtil;
+import com.drivepro.entity.Payment;
+import com.drivepro.dao.CrudUtil;
 
 import java.sql.SQLException;
 

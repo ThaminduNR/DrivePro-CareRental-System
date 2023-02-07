@@ -1,7 +1,10 @@
 package com.drivepro.controller;
 
-import com.drivepro.model.CashierModel;
-import com.drivepro.to.Cashier;
+import com.drivepro.bo.BOFactory;
+import com.drivepro.bo.BOTypes;
+import com.drivepro.bo.custom.CashierBO;
+import com.drivepro.bo.custom.impl.CashierBOImpl;
+import com.drivepro.dto.CashierDTO;
 import com.drivepro.view.tm.CashierTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,10 +31,10 @@ public class ManageCashierFormController {
     public TableColumn colContact;
     public TableColumn colAge;
     public TableColumn colPws;
+    CashierBO cashierBO = (CashierBO) BOFactory.getBoFactory().getBO(BOTypes.CASHIER);
 
 
-
-    public void initialize(){
+    public void initialize() {
         setTableData();
         setValueFactory();
         AddListener();
@@ -39,28 +42,27 @@ public class ManageCashierFormController {
 
     public void addCashierOnAction(ActionEvent actionEvent) {
         String id = txtCashId.getText();
-        String name  = txtCashName.getText();
+        String name = txtCashName.getText();
         String address = txtCashAddress.getText();
         String contact = txtCashContact.getText();
         String password = txtPws.getText();
 
 
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") ||
+                txtAge.getText().equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
 
-        if (id.equalsIgnoreCase("")||name.equalsIgnoreCase("")||address.equalsIgnoreCase("")||contact.equalsIgnoreCase("")||
-            txtAge.getText().equalsIgnoreCase("")||password.equalsIgnoreCase("")){
-
-            new Alert(Alert.AlertType.ERROR,"Please fill the Blanks").show();
-        }else {
+            new Alert(Alert.AlertType.ERROR, "Please fill the Blanks").show();
+        } else {
             try {
                 int age = Integer.parseInt(txtAge.getText());
-                Cashier cashier = new Cashier(id,name,address,contact,age,password);
-                boolean isAdded = CashierModel.addCashier(cashier);
-                if (isAdded){
-                    new Alert(Alert.AlertType.INFORMATION,"Added Success");
+                CashierDTO cashierDTO = new CashierDTO(id, name, address, contact, age, password);
+                boolean isAdded = cashierBO.addCashier(cashierDTO);
+                if (isAdded) {
+                    new Alert(Alert.AlertType.INFORMATION, "Added Success");
                     setTableData();
                     clearText();
-                }else{
-                    new Alert(Alert.AlertType.INFORMATION,"Added Failed");
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Added Failed");
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -71,28 +73,28 @@ public class ManageCashierFormController {
 
     public void updateCashierOnAction(ActionEvent actionEvent) {
         String id = txtCashId.getText();
-        String name  = txtCashName.getText();
+        String name = txtCashName.getText();
         String address = txtCashAddress.getText();
         String contact = txtCashContact.getText();
 
         String password = txtPws.getText();
 
-        if(id.equalsIgnoreCase("")||name.equalsIgnoreCase("")||address.equalsIgnoreCase("")||contact.equalsIgnoreCase("")||
-                txtAge.getText().equalsIgnoreCase("")||password.equalsIgnoreCase("")){
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") ||
+                txtAge.getText().equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
 
-            new Alert(Alert.AlertType.ERROR,"Fill the blanks ").show();
+            new Alert(Alert.AlertType.ERROR, "Fill the blanks ").show();
 
-        }else {
+        } else {
             int age = Integer.parseInt(txtAge.getText());
-            Cashier cashier = new Cashier(id,name,address,contact,age,password);
+            CashierDTO cashierDTO = new CashierDTO(id, name, address, contact, age, password);
             try {
-                boolean updated = CashierModel.updateCustomer(cashier);
-                if (updated){
-                    new Alert(Alert.AlertType.INFORMATION,"Update Success").show();
+                boolean updated = cashierBO.updateCashier(cashierDTO);
+                if (updated) {
+                    new Alert(Alert.AlertType.INFORMATION, "Update Success").show();
                     setTableData();
                     clearText();
-                }else{
-                    new Alert(Alert.AlertType.ERROR,"Update Failed").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Update Failed").show();
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -103,25 +105,25 @@ public class ManageCashierFormController {
 
     public void deleteCashierOnAction(ActionEvent actionEvent) {
         String id = txtCashId.getText();
-        String name  = txtCashName.getText();
+        String name = txtCashName.getText();
         String address = txtCashAddress.getText();
         String contact = txtCashContact.getText();
         String password = txtPws.getText();
 
-        if (id.equalsIgnoreCase("")||name.equalsIgnoreCase("")||address.equalsIgnoreCase("")||contact.equalsIgnoreCase("")||
-                txtAge.getText().equalsIgnoreCase("")||password.equalsIgnoreCase("")){
+        if (id.equalsIgnoreCase("") || name.equalsIgnoreCase("") || address.equalsIgnoreCase("") || contact.equalsIgnoreCase("") ||
+                txtAge.getText().equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
 
-            new Alert(Alert.AlertType.ERROR,"Choose the Cashier").show();
+            new Alert(Alert.AlertType.ERROR, "Choose the Cashier").show();
 
-        }else {
+        } else {
             try {
-                boolean isDeleted = CashierModel.deleteCashier(id);
-                if (isDeleted){
-                    new Alert(Alert.AlertType.INFORMATION,"Delete Success").show();
+                boolean isDeleted = cashierBO.deleteCashier(id);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.INFORMATION, "Delete Success").show();
                     setTableData();
                     clearText();
-                }else{
-                    new Alert(Alert.AlertType.ERROR,"Delete Failed").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Delete Failed").show();
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -130,11 +132,11 @@ public class ManageCashierFormController {
 
     }
 
-    public void setTableData(){
+    public void setTableData() {
         ObservableList<CashierTM> cashierList = FXCollections.observableArrayList();
         try {
-            ArrayList<Cashier> allCashier = CashierModel.getAllCashier();
-            for (Cashier c :allCashier) {
+            ArrayList<CashierDTO> allCashier = cashierBO.getAllCashier();
+            for (CashierDTO c : allCashier) {
                 CashierTM cashierTM = new CashierTM(c.getCashierId(), c.getName(), c.getAddress(), c.getContact(), c.getAge(), c.getPassword());
                 cashierList.add(cashierTM);
             }
@@ -146,18 +148,18 @@ public class ManageCashierFormController {
 
     }
 
-    public  void setValueFactory(){
-        colId.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("cashierId"));
-        colName.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("name"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("address"));
-        colContact.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("contact"));
-        colAge.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("age"));
-        colPws.setCellValueFactory(new PropertyValueFactory<CashierTM,String>("password"));
+    public void setValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("cashierId"));
+        colName.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("name"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("contact"));
+        colAge.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("age"));
+        colPws.setCellValueFactory(new PropertyValueFactory<CashierTM, String>("password"));
     }
 
-    public void AddListener(){
+    public void AddListener() {
         cashierTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue!=null) {
+            if (newValue != null) {
                 setDataToTextField(newValue);
             }
         });
@@ -172,7 +174,7 @@ public class ManageCashierFormController {
         txtPws.setText(c.getPassword());
     }
 
-    public void clearText(){
+    public void clearText() {
         txtCashId.clear();
         txtCashName.clear();
         txtCashAddress.clear();
