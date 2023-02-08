@@ -2,6 +2,7 @@ package com.drivepro.dao.custom;
 
 import com.drivepro.dao.CrudDAO;
 import com.drivepro.dto.BookingDTO;
+import com.drivepro.entity.Booking;
 import javafx.collections.ObservableList;
 import rex.utils.S;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface BookingDAO extends CrudDAO<BookingDTO, String> {
+public interface BookingDAO extends CrudDAO<Booking, String> {
 
     String getLastOrderId() throws SQLException, ClassNotFoundException;
 

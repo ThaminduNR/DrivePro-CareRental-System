@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.CustomerDAO;
 import com.drivepro.dto.CustomerDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,28 +12,28 @@ import java.util.ArrayList;
 public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
-    public boolean add(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(Customer customer) throws SQLException, ClassNotFoundException {
          return CrudUtil.execute("INSERT INTO customer VALUES(?,?,?,?,?,?)",
 
-                customerDTO.getCustomerId(),
-                customerDTO.getName(),
-                customerDTO.getAddress(),
-                customerDTO.getContact(),
-                customerDTO.getAge(),
-                customerDTO.getDob()
+                 customer.getCustomerId(),
+                 customer.getName(),
+                 customer.getAddress(),
+                 customer.getContact(),
+                 customer.getAge(),
+                 customer.getDob()
 
 
         );
     }
 
     @Override
-    public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Customer> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM customer");
-        ArrayList<CustomerDTO> customerList = new ArrayList<>();
+        ArrayList<Customer> customerList = new ArrayList<>();
 
         while (rst.next()) {
             customerList.add(
-                    new CustomerDTO(
+                    new Customer(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -47,15 +48,15 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public boolean update(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(Customer customer) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE customer SET name=?,address=?,contact=?,age=?,dob=? WHERE customerId=?",
 
-                customerDTO.getName(),
-                customerDTO.getAddress(),
-                customerDTO.getContact(),
-                customerDTO.getAge(),
-                customerDTO.getDob(),
-                customerDTO.getCustomerId()
+                customer.getName(),
+                customer.getAddress(),
+                customer.getContact(),
+                customer.getAge(),
+                customer.getDob(),
+                customer.getCustomerId()
 
         );
     }

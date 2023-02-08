@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.CashierDAO;
 import com.drivepro.dto.CashierDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.Cashier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,29 +11,29 @@ import java.util.ArrayList;
 
 public class CashierDAOImpl implements CashierDAO {
     @Override
-    public boolean add(CashierDTO cashierDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(Cashier cashier) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO cashier VALUES(?,?,?,?,?,?)";
         return CrudUtil.execute(sql,
 
-                cashierDTO.getCashierId(),
-                cashierDTO.getName(),
-                cashierDTO.getAddress(),
-                cashierDTO.getContact(),
-                cashierDTO.getAge(),
-                cashierDTO.getPassword()
+                cashier.getCashierId(),
+                cashier.getName(),
+                cashier.getAddress(),
+                cashier.getContact(),
+                cashier.getAge(),
+                cashier.getPassword()
 
         );
     }
 
     @Override
-    public ArrayList<CashierDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Cashier> getAll() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM cashier";
         ResultSet rst = CrudUtil.execute(sql);
-        ArrayList<CashierDTO> list = new ArrayList<>();
+        ArrayList<Cashier> list = new ArrayList<>();
 
         while (rst.next()){
             list.add(
-                    new CashierDTO(
+                    new Cashier(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -47,15 +48,15 @@ public class CashierDAOImpl implements CashierDAO {
     }
 
     @Override
-    public boolean update(CashierDTO cashierDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(Cashier cashier) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE cashier SET name=?,address=?,contact=?,age=?,password=? WHERE cashierId=?",
 
-                cashierDTO.getName(),
-                cashierDTO.getAddress(),
-                cashierDTO.getContact(),
-                cashierDTO.getAge(),
-                cashierDTO.getPassword(),
-                cashierDTO.getCashierId()
+                cashier.getName(),
+                cashier.getAddress(),
+                cashier.getContact(),
+                cashier.getAge(),
+                cashier.getPassword(),
+                cashier.getCashierId()
 
         );
 

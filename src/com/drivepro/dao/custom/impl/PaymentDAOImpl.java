@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.PaymentDAO;
 import com.drivepro.dto.PaymentDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,29 +11,29 @@ import java.util.ArrayList;
 
 public class PaymentDAOImpl implements PaymentDAO {
     @Override
-    public boolean add(PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(Payment payment) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO payment VALUES(?,?,?,?,?,?,?)";
 
         return   CrudUtil.execute(sql,
 
-                paymentDTO.getPaymentId(),
-                paymentDTO.getCustId(),
-                paymentDTO.getPaydate(),
-                paymentDTO.getPayTime(),
-                paymentDTO.getVehicleNo(),
-                paymentDTO.getTotalPay(),
-                paymentDTO.getMethod()
+                payment.getPaymentId(),
+                payment.getCustId(),
+                payment.getPaydate(),
+                payment.getPayTime(),
+                payment.getVehicleNo(),
+                payment.getTotalPay(),
+                payment.getMethod()
 
         );
     }
 
     @Override
-    public ArrayList<PaymentDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Payment> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean update(PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(Payment payment) throws SQLException, ClassNotFoundException {
         return false;
     }
 

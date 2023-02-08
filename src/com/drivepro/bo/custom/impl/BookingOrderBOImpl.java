@@ -1,5 +1,6 @@
 package com.drivepro.bo.custom.impl;
 
+import com.drivepro.bo.Converter;
 import com.drivepro.bo.custom.BookingOrderBO;
 import com.drivepro.dao.DAOFactory;
 import com.drivepro.dao.DAOTypes;
@@ -39,7 +40,7 @@ public class BookingOrderBOImpl implements BookingOrderBO {
         try {
             connection = DBConnection.getInstance().getConnection();
             connection.setAutoCommit(false);
-            boolean isAdded = bookingDAO.add(bookingDTO);
+            boolean isAdded = bookingDAO.add(Converter.toBookingEntity(bookingDTO));
             if (isAdded) {
                 System.out.println("Booking Added ok");
             } else {
@@ -50,7 +51,7 @@ public class BookingOrderBOImpl implements BookingOrderBO {
             e.printStackTrace();
         }
         try {
-            boolean isAdded = vehicleDetailDAO.add(vehicleDetailsDTO);
+            boolean isAdded = vehicleDetailDAO.add(Converter.toVehicleDetailsEntity(vehicleDetailsDTO));
             if (isAdded) {
                 System.out.println("vehicle Detail Added");
             } else {
@@ -63,7 +64,7 @@ public class BookingOrderBOImpl implements BookingOrderBO {
         }
         //send data to BookingDetails table
         try {
-            boolean isAdded = bookingDetailDAO.add(bookingDetailsDTO);
+            boolean isAdded = bookingDetailDAO.add(Converter.toBookingDetailsEntity(bookingDetailsDTO));
             if (isAdded) {
                 connection.commit();
 

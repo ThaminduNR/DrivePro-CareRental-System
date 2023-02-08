@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.VehicleDAO;
 import com.drivepro.dto.VehicleDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.Vehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,28 +11,28 @@ import java.util.ArrayList;
 
 public class VehicleDAOImpl implements VehicleDAO {
     @Override
-    public boolean add(VehicleDTO vehicleDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(Vehicle vehicle) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO vehicle VALUES(?,?,?,?,?,?,?,?)",
 
-                vehicleDTO.getVehicleNo(),
-                vehicleDTO.getName(),
-                vehicleDTO.getBrand(),
-                vehicleDTO.getDayOfCharge(),
-                vehicleDTO.getFuelType(),
-                vehicleDTO.getVehicleType(),
-                vehicleDTO.getImage(),
-                vehicleDTO.getStatus()
+                vehicle.getVehicleNo(),
+                vehicle.getName(),
+                vehicle.getBrand(),
+                vehicle.getDayOfCharge(),
+                vehicle.getFuelType(),
+                vehicle.getVehicleType(),
+                vehicle.getImage(),
+                vehicle.getStatus()
 
         );
     }
 
     @Override
-    public ArrayList<VehicleDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Vehicle> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM vehicle");
-        ArrayList<VehicleDTO> vehicleList = new ArrayList<>();
+        ArrayList<Vehicle> vehicleList = new ArrayList<>();
 
         while (rst.next()){
-            vehicleList.add(new VehicleDTO (
+            vehicleList.add(new Vehicle (
                     rst.getString("vehicleNo"),
                     rst.getString("name"),
                     rst.getString("brand"),
@@ -48,20 +49,20 @@ public class VehicleDAOImpl implements VehicleDAO {
     }
 
     @Override
-    public boolean update(VehicleDTO vehicleDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(Vehicle vehicle) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE vehicle SET name = ?,brand=?,dayOfCharge=?,fuelType=?,vehicleType=?,image=?,status=? WHERE vehicleNo =?";
 
         return CrudUtil.execute(sql,
 
 
-                vehicleDTO.getName(),
-                vehicleDTO.getBrand(),
-                vehicleDTO.getDayOfCharge(),
-                vehicleDTO.getFuelType(),
-                vehicleDTO.getVehicleType(),
-                vehicleDTO.getImage(),
-                vehicleDTO.getStatus(),
-                vehicleDTO.getVehicleNo()
+                vehicle.getName(),
+                vehicle.getBrand(),
+                vehicle.getDayOfCharge(),
+                vehicle.getFuelType(),
+                vehicle.getVehicleType(),
+                vehicle.getImage(),
+                vehicle.getStatus(),
+                vehicle.getVehicleNo()
 
 
         );

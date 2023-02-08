@@ -1,12 +1,14 @@
 package com.drivepro.bo.custom.impl;
 
 
+import com.drivepro.bo.Converter;
 import com.drivepro.bo.custom.VehicleBO;
 import com.drivepro.dao.DAOFactory;
 import com.drivepro.dao.DAOTypes;
 import com.drivepro.dao.custom.VehicleDAO;
 import com.drivepro.dao.custom.impl.VehicleDAOImpl;
 import com.drivepro.dto.VehicleDTO;
+import com.drivepro.entity.Vehicle;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ public class VehicleBOImpl implements VehicleBO {
 
     @Override
     public boolean addVehicle(VehicleDTO vehicleDTO) throws SQLException, ClassNotFoundException {
-        return vehicleDAO.add(vehicleDTO);
+        return vehicleDAO.add(Converter.toVehicleEntity(vehicleDTO));
     }
 
     @Override
@@ -26,11 +28,18 @@ public class VehicleBOImpl implements VehicleBO {
 
     @Override
     public boolean updateVehicle(VehicleDTO vehicleDTO) throws SQLException, ClassNotFoundException {
-        return vehicleDAO.update(vehicleDTO);
+        return vehicleDAO.update(Converter.toVehicleEntity(vehicleDTO));
     }
 
     @Override
     public ArrayList<VehicleDTO> getAllVehicle() throws SQLException, ClassNotFoundException {
-        return vehicleDAO.getAll();
+        ArrayList<Vehicle> all = vehicleDAO.getAll();
+
+        ArrayList<VehicleDTO> allVehicle = new ArrayList<>();
+
+        for (Vehicle vh:all) {
+            allVehicle.add(new VehicleDTO(vh.getVehicleNo(),vh.getName(),vh.getBrand(),vh.getDayOfCharge(),vh.getFuelType(),vh.getVehicleType(),vh.getImage(),vh.getStatus()));
+        }
+        return allVehicle;
     }
 }

@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.ReturnVehicleDAO;
 import com.drivepro.dto.ReturnVehicleDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.ReturnVehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,29 +11,29 @@ import java.util.ArrayList;
 
 public class ReturnVehicleDAOImpl implements ReturnVehicleDAO {
     @Override
-    public boolean add(ReturnVehicleDTO returnVehicleDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(ReturnVehicle returnVehicle) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO returnVehicle VALUES(?,?,?,?,?,?,?)";
         return CrudUtil.execute(sql,
 
-                returnVehicleDTO.getVehicleNo(),
-                returnVehicleDTO.getVehicleName(),
-                returnVehicleDTO.getStartDate(),
-                returnVehicleDTO.getEndDate(),
-                returnVehicleDTO.getDayCount(),
-                returnVehicleDTO.getDayOfCharge(),
-                returnVehicleDTO.getCustId()
+                returnVehicle.getVehicleNo(),
+                returnVehicle.getVehicleName(),
+                returnVehicle.getStartDate(),
+                returnVehicle.getEndDate(),
+                returnVehicle.getDayCount(),
+                returnVehicle.getDayOfCharge(),
+                returnVehicle.getCustId()
         );
     }
 
     @Override
-    public ArrayList<ReturnVehicleDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<ReturnVehicle> getAll() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM returnVehicle";
-        ArrayList<ReturnVehicleDTO> returnList = new ArrayList<>();
+        ArrayList<ReturnVehicle> returnList = new ArrayList<>();
 
         ResultSet rst = CrudUtil.execute(sql);
         while (rst.next()){
             returnList.add(
-                    new ReturnVehicleDTO(
+                    new ReturnVehicle(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -50,7 +51,7 @@ public class ReturnVehicleDAOImpl implements ReturnVehicleDAO {
 
 
     @Override
-    public boolean update(ReturnVehicleDTO returnVehicleDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(ReturnVehicle returnVehicle) throws SQLException, ClassNotFoundException {
         return false;
     }
 

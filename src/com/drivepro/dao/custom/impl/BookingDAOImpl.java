@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.BookingDAO;
 import com.drivepro.dto.BookingDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.Booking;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,26 +13,26 @@ import java.util.ArrayList;
 
 public class BookingDAOImpl implements BookingDAO {
     @Override
-    public boolean add(BookingDTO bookingDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(Booking booking) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO booking VALUES (?,?,?,?)";
 
         return CrudUtil.execute(sql,
 
-                bookingDTO.getBookingId(),
-                bookingDTO.getDate(),
-                bookingDTO.getTotalCost(),
-                bookingDTO.getCustId()
+                booking.getBookingId(),
+                booking.getDate(),
+                booking.getTotalCost(),
+                booking.getCustId()
 
         );
     }
 
     @Override
-    public ArrayList<BookingDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Booking> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean update(BookingDTO bookingDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(Booking booking) throws SQLException, ClassNotFoundException {
         return false;
     }
 

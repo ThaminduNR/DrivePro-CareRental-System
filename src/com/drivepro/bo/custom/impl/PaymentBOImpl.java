@@ -1,5 +1,6 @@
 package com.drivepro.bo.custom.impl;
 
+import com.drivepro.bo.Converter;
 import com.drivepro.bo.custom.PaymentBO;
 import com.drivepro.dao.DAOFactory;
 import com.drivepro.dao.DAOTypes;
@@ -20,6 +21,6 @@ public class PaymentBOImpl implements PaymentBO {
 
     @Override
     public boolean addPayments(PaymentDTO paymentDTO) throws SQLException, ClassNotFoundException {
-        return paymentDAO.add(paymentDTO);
+        return paymentDAO.add(Converter.toPaymentEntity(paymentDTO));
     }
 }

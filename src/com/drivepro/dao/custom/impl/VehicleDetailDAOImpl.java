@@ -3,6 +3,7 @@ package com.drivepro.dao.custom.impl;
 import com.drivepro.dao.custom.VehicleDetailDAO;
 import com.drivepro.dto.VehicleDetailsDTO;
 import com.drivepro.dao.CrudUtil;
+import com.drivepro.entity.VehicleDetails;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,31 +12,31 @@ import java.util.ArrayList;
 public class VehicleDetailDAOImpl implements VehicleDetailDAO {
 
     @Override
-    public boolean add(VehicleDetailsDTO vehicleDetailsDTO) throws SQLException, ClassNotFoundException {
+    public boolean add(VehicleDetails vehicleDetails) throws SQLException, ClassNotFoundException {
         String sql ="INSERT INTO vehicleDetail VALUES (?,?,?,?,?,?,?)";
         return CrudUtil.execute(sql,
 
-                vehicleDetailsDTO.getVehicleNo(),
-                vehicleDetailsDTO.getVehicleName(),
-                vehicleDetailsDTO.getStartDate(),
-                vehicleDetailsDTO.getEndDate(),
-                vehicleDetailsDTO.getDayCount(),
-                vehicleDetailsDTO.getDayOfCharge(),
-                vehicleDetailsDTO.getCustId()
+                vehicleDetails.getVehicleNo(),
+                vehicleDetails.getVehicleName(),
+                vehicleDetails.getStartDate(),
+                vehicleDetails.getEndDate(),
+                vehicleDetails.getDayCount(),
+                vehicleDetails.getDayOfCharge(),
+                vehicleDetails.getCustId()
 
 
         );
     }
 
     @Override
-    public ArrayList<VehicleDetailsDTO> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<VehicleDetails> getAll() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM vehicleDetail";
-        ArrayList<VehicleDetailsDTO> vlList = new ArrayList<>();
+        ArrayList<VehicleDetails> vlList = new ArrayList<>();
 
         ResultSet rst = CrudUtil.execute(sql);
         while (rst.next()){
             vlList.add(
-                    new VehicleDetailsDTO(
+                    new VehicleDetails(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -50,7 +51,7 @@ public class VehicleDetailDAOImpl implements VehicleDetailDAO {
     }
 
     @Override
-    public boolean update(VehicleDetailsDTO vehicleDetailsDTO) throws SQLException, ClassNotFoundException {
+    public boolean update(VehicleDetails vehicleDetails) throws SQLException, ClassNotFoundException {
         return false;
     }
 

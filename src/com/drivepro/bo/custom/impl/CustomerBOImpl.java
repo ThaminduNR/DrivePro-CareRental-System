@@ -1,11 +1,13 @@
 package com.drivepro.bo.custom.impl;
 
+import com.drivepro.bo.Converter;
 import com.drivepro.bo.custom.CustomerBO;
 import com.drivepro.dao.DAOFactory;
 import com.drivepro.dao.DAOTypes;
 import com.drivepro.dao.custom.CustomerDAO;
 import com.drivepro.dao.custom.impl.CustomerDAOImpl;
 import com.drivepro.dto.CustomerDTO;
+import com.drivepro.entity.Customer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,12 +18,12 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public boolean addCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
-        return customerDAO.add(customerDTO);
+        return customerDAO.add(Converter.toCustomerEntity(customerDTO));
     }
 
     @Override
     public boolean updateCustomer(CustomerDTO customerDTO) throws SQLException, ClassNotFoundException {
-        return customerDAO.update(customerDTO);
+        return customerDAO.update(Converter.toCustomerEntity(customerDTO));
     }
 
     @Override
@@ -31,7 +33,12 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
-        return customerDAO.getAll();
+        ArrayList<Customer> all = customerDAO.getAll();
+        ArrayList<CustomerDTO> custlist = new ArrayList<>();
+        for (Customer cus :all) {
+            custlist.add(new CustomerDTO(cus.getCustomerId(),cus.getName(),cus.getAddress(),cus.getContact(),cus.getAge(),cus.getDob()));
+        }
+        return custlist;
     }
 
     @Override
